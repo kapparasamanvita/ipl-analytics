@@ -18,6 +18,8 @@ dbt marts           ← ipl_db.marts.top_batsmen, team_win_stats,
                        (business logic — tables)
 ```
 
+![dbt Lineage Graph](lineage.png)
+
 ## Business Questions Answered
 
 | Model | Question |
