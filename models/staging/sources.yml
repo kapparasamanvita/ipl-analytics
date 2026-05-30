@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: ipl_raw
+    database: ipl_db
+    schema: raw
+    description: "Raw IPL data loaded from Kaggle CSVs"
+    tables:
+      - name: MATCHES
+        description: "Raw IPL match results from 2008 to 2020"
+        columns:
+          - name: ID
+            description: "Unique match identifier"
+          - name: SEASON
+            description: "IPL season year"
+          - name: WINNER
+            description: "Winning team name"
+
+      - name: DELIVERIES
+        description: "Ball-by-ball delivery data for all IPL matches"
+        columns:
+          - name: MATCH_ID
+            description: "Foreign key to MATCHES.ID"
+          - name: BATSMAN_RUNS
+            description: "Runs scored by batsman on this delivery"
+          - name: TOTAL_RUNS
+            description: "Total runs including extras on this delivery"

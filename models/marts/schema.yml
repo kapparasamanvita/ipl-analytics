@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: top_batsmen
+    description: "Top 50 IPL batsmen of all time ranked by total runs. Includes strike rate, boundaries, and averages."
+    columns:
+      - name: batsman
+        description: "Batsman name"
+        tests:
+          - not_null
+      - name: total_runs
+        description: "Total runs scored across all seasons"
+        tests:
+          - not_null
+      - name: strike_rate
+        description: "Runs scored per 100 balls faced"
+        tests:
+          - not_null
+
+  - name: team_win_stats
+    description: "Win/loss statistics per team per season."
+    columns:
+      - name: season
+        description: "IPL season year"
+        tests:
+          - not_null
+      - name: team
+        description: "Team name"
+        tests:
+          - not_null
+      - name: win_pct
+        description: "Percentage of matches won"
+        tests:
+          - not_null
+
+  - name: toss_analysis
+    description: "Analysis of whether winning the toss correlates with winning the match."
+    columns:
+      - name: toss_decision
+        description: "bat or field"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['bat', 'field']
+
+  - name: bowler_economy
+    description: "Top 50 most economical bowlers (minimum 200 balls bowled)."
+    columns:
+      - name: bowler
+        description: "Bowler name"
+        tests:
+          - not_null
+      - name: economy_rate
+        description: "Runs conceded per over"
+        tests:
+          - not_null

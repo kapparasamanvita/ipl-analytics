@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_matches
+    description: "Cleaned and renamed IPL match results. One row per match."
+    columns:
+      - name: match_id
+        description: "Unique match identifier — primary key"
+        tests:
+          - unique
+          - not_null
+      - name: season
+        description: "IPL season year (e.g. 2008, 2009)"
+        tests:
+          - not_null
+      - name: winner
+        description: "Name of the winning team"
+        tests:
+          - not_null:
+              where: "result != 'no result'"
+      - name: toss_decision
+        description: "Decision made by toss winner: bat or field"
+        tests:
+          - accepted_values:
+              values: ['bat', 'field']
+
+  - name: stg_deliveries
+    description: "Ball-by-ball delivery data. One row per ball bowled."
+    columns:
+      - name: match_id
+        description: "Foreign key referencing stg_matches.match_id"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_matches')
+              field: match_id
+      - name: batsman_runs
+        description: "Runs scored by the batsman on this ball (excludes extras)"
+        tests:
+          - not_null
+      - name: inning
+        description: "Innings number (1 or 2)"
+        tests:
+          - not_null
